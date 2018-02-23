@@ -1,0 +1,101 @@
+App Review
+==========
+Header: Sign Up - Sign In - Sign Out
+-------
+Landing:
+-------
+1.Route: '/'           => Greetings
+2.Route: '/signup'     => Email, Password, Confirm Password, Submit
+3.Route: '/signin'     => Email, Password, Submit
+4.Route: '/feature'    => Super special feature => Sign Out
+
+Application state:
+=================
+{
+   auth:{
+   authenticated: BOOLEAN, =====> Change whenever a user signs in, signs out or signs up
+   error: STRING ===============> Change whenever an error related to auth occurs
+   }
+}
+
+Npm Install
+===========
+.npm install --save redux-form
+.npm install --save redux-thunk
+.npm install --save axios
+
+
+
+Auth Flow
+=========
+1.User Submits: Email / Password
+2.Action Creator
+3.Submit: Email / Password to server
+4.Is Correct Info? => Yes => Server returns a JWT Token => Redirect user to feature, update state, save token
+                       No => Show an error message
+
+Redux Thunk
+===========
+Action creator(returns an) =====> Action ===> Dispatch(Makes sure the action gets sent to all reducers) ==> Reducer
+                                                                                                        ==> Reducer
+                                                                                                        ==> Reducer
+Action-creator returns an object but now we return a function because allows us to dispatch our own
+actions on behalf of redux-thunk and all the logic we can stick it inside the function.
+the purpose of redux-thunk is to allow us to dispatch multiple different actions inside of action-creator
+so with redux-thunk we are not limited to single action, we can dispatch as many as we want
+.with redux-thunk there is no synchronous action here, the function will be called with dispatch and we can
+wait as long as we want to dispatch a function, anytime we want
+Dispatch method: is a method inside redux that excepts actions and forwards them in different reducers
+in other words is the main pipeline of redux.
+
+
+Process
+=======
+1. Open mongod in another terminal
+2. Open server1 in another terminal by running npm run dev
+3. npm run start in the clientSide_Authentication
+
+CORS in a Nutshell
+==================
+CORS is Cross orjan resources sharing, is a security protocol or kind of a concept in security
+the sole purpose of course is to protect users in a browser environment, is there to protect users from people
+on malicious websites, is a security protocol that looks at your current domain and port and attaches that to any
+ajax requests that is made.
+
+Signin flow
+===========
+
+* Did user enter the correct auth info?
+
+=> Yes: ===> Dispatch action to flip 'authenticated' piece of state to true,
+        ===> Navigate the user to '/feature'
+        ===> Save the JWT token for the future requests
+=> No:  ===> Show an error message(update 'error' piece of state)
+
+
+LocalStorage
+============
+ .LocalStorage <===> Client <=====> Server = .JavaScript, Html, Css, Data
+ .localStorage saves our token for future use.
+ .localStorage is not shared between domains, is unique to a domain
+
+Redux-Form validation
+=====================
+form:
+.Email
+.Password
+.Password Confirm
+.Sign up
+===> User makes any changes to form? take all of the values from the form and send them
+to 'validate' function
+===> validate(){
+  email: 'test@example.com',
+  password: 'abdghsj',
+  passwordConfirm:'2345df'
+  }
+  if any of these fields are bad create a new object and attach a string error message
+  to show to the user
+
+
+
+
